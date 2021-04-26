@@ -33,7 +33,7 @@ const RecipeCardDiv = styled.div`
 		width: 100%;
 		height: 250px;
 		background: center / cover;
-		background-image: url('https://moorlandseater.com/wp-content/uploads/2018/05/no-knead-bread-for-beginners-sliced-on-a-board-moorlands-eater-DSC07055.jpg');
+		/* background-image: url('https://moorlandseater.com/wp-content/uploads/2018/05/no-knead-bread-for-beginners-sliced-on-a-board-moorlands-eater-DSC07055.jpg'); */
 	}
 
 	.title {
@@ -47,7 +47,7 @@ const RecipeCardDiv = styled.div`
 
 	#container.closed .title {
 		padding: 40px 20px 10px 20px;
-		margin-top: -87px;
+		margin-top: -87px; // this moves the title up into the picture when its closed
 		color: white;
 		border: none;
 	}
@@ -70,8 +70,8 @@ const RecipeCardDiv = styled.div`
 
 	article {
 		padding: 25px 30px;
-		overflow: hidden;
-		max-height: 400px;
+		overflow: hidden; // keeps from seeing all the recipe when the card is closed
+		/* max-height: 400px; */ //
 	}
 
 	#container.closed article {
@@ -86,12 +86,11 @@ const RecipeCardDiv = styled.div`
 		padding-left: 4px;
 		font-size: 0.9rem;
 		display: flex;
-		justify-content: space-between;
+		/* justify-content: space-between; */
 	}
 
 	.ingredients > li {
 		list-style-type: none;
-		/* display: flex; */
 		margin: 4px 0px;
 	}
 
@@ -116,7 +115,7 @@ export default function RecipeCard({ recipe }) {
 		<RecipeCardDiv>
 			<div className={isOpen ? '' : 'closed'} id="container" onClick={() => setIsOpen(!isOpen)}>
 				<header id="toggle">
-					<div className="header"></div>
+					<div className="header" style={{ backgroundImage: `url(${recipe.backgroundImage})` }}></div>
 					<div className="title">{recipe.name}</div>
 				</header>
 				<article>
@@ -124,8 +123,8 @@ export default function RecipeCard({ recipe }) {
 						{recipe.ingredients.map((ingredient, index) => {
 							return (
 								<li key="index" className="ingredients">
-									<div className="amount">{ingredient.amount}</div>
-									<div className="ingredient">{ingredient.ingredient}</div>
+									<div className="amount">{ingredient.amount} -</div>
+									<div className="ingredient"> - {ingredient.ingredient}</div>
 								</li>
 							);
 						})}
