@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -63,31 +63,22 @@ color:green;
 `
 
 const recipes = [
-    {source:'', email:'', recipeName:'', ingrediants:'', instructions:''}
+    {source:'', title:'', recipeName:'', ingrediants:'', instructions:'', category:'',}
 ]
 
 const initialValues = {
     source: '',
-    email:'',
+    title:'',
     recipeName: '',
     ingrediants:'',
     instructions:'',
+    category:'',
 }
 
 function RecipeForm(){
     const [recipe, setRecipe] = useState(recipes);
     const [formValues, setFormValues] = useState(initialValues);
 
-    //this useEffect needs to be put in with a log in...
-    useEffect(() =>{
-        axios.get('https://buildweekrecipes.herokuapp.com/api/recipes')
-        .then((res) => {
-            console.log(res)
-        })
-        .catch((error) =>{
-            console.log(error)
-        })
-    },[])
 
     const change = ev => {
         const { name, value } = ev.target
@@ -100,12 +91,13 @@ function RecipeForm(){
         ev.preventDefault();
         const newRecipe = {
             source: formValues.source,
-            email: formValues.email,
+            title: formValues.title,
             recipeName: formValues.recipeName,
             ingrediants: formValues.ingrediants,
             instructions: formValues.instructions,
+            category: formValues.category,
         }
-        axios.post('https://buildweekrecipes.herokuapp.com/api/recipes', newRecipe)
+        axios.post('https://reqres.in/api/orders', newRecipe)
         .then(res => {
             setFormValues(initialValues)
             console.log(initialValues)
@@ -122,12 +114,20 @@ function RecipeForm(){
                 {recipe.map((recipe,asd) => {
                     return(
                         <div key={asd}>
-                            {recipe.source} {recipe.email} {recipe.recipeName} {recipe.instructions}
+                            {recipe.source} {recipe.title} {recipe.recipeName} {recipe.instructions}
                         </div>
                     )
                 })}
                 <form onSubmit={submit}>
                     <ul>
+                    <li>
+                    Title:<input 
+                        type='text'
+                        onChange={change}
+                        value={formValues.title}
+                        name='email'
+                        />
+                    </li>
                     <li>
                     Source:<input 
                         type='text'
@@ -136,20 +136,21 @@ function RecipeForm(){
                         name='source'
                         />
                     </li>
-                    <li>
-                    Email:<input 
-                        type='text'
-                        onChange={change}
-                        value={formValues.email}
-                        name='email'
-                        />
-                    </li>
+                    
                     <li>
                     Recipe Name:<input 
                         type='text'
                         onChange={change}
                         value={formValues.recipeName}
                         name='recipeName'
+                        />
+                    </li>
+                    <li>
+                        Category:<input
+                        type='text'
+                        onChange={change}
+                        value={formValues.category}
+                        name='category'
                         />
                     </li>
                     <li>
@@ -168,14 +169,15 @@ function RecipeForm(){
                         name='instructions'
                         />
                     </li>
+                    
                     </ul>
                 </form>
                 <div className='buttons'>
-                    <Trash>
+                    <Trash onSubmit={submit}>
                         <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                     </Trash>
-                    <Check>
-                        <FontAwesomeIcon onSubmit={submit} icon={faCheck}></FontAwesomeIcon>
+                    <Check onSubmit={submit}>
+                        <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
                     </Check>
                 </div>
             </div>
