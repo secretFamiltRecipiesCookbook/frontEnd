@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -78,6 +78,16 @@ function RecipeForm(){
     const [recipe, setRecipe] = useState(recipes);
     const [formValues, setFormValues] = useState(initialValues);
 
+    //this useEffect needs to be put in with a log in...
+    useEffect(() =>{
+        axios.get('https://buildweekrecipes.herokuapp.com/api/recipes')
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((error) =>{
+            console.log(error)
+        })
+    },[])
 
     const change = ev => {
         const { name, value } = ev.target
@@ -95,7 +105,7 @@ function RecipeForm(){
             ingrediants: formValues.ingrediants,
             instructions: formValues.instructions,
         }
-        axios.post('https://reqres.in/api/orders', newRecipe)
+        axios.post('https://buildweekrecipes.herokuapp.com/api/recipes', newRecipe)
         .then(res => {
             setFormValues(initialValues)
             console.log(initialValues)
@@ -165,7 +175,7 @@ function RecipeForm(){
                         <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                     </Trash>
                     <Check>
-                        <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+                        <FontAwesomeIcon onSubmit={submit} icon={faCheck}></FontAwesomeIcon>
                     </Check>
                 </div>
             </div>
