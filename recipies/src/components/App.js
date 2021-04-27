@@ -3,6 +3,7 @@ import '../App.css';
 import NavBarWx from './NavBarWx.js';
 import RecipeCard from './RecipeCard.js';
 import styled from 'styled-components';
+import RecipeForm from './RecipeForm';
 
 const CardsContainer = styled.div`
 	width: 80%;
@@ -75,6 +76,7 @@ function App() {
 		<>
 			<NavBarWx />
 			<div>Main Image</div>
+			<RecipeForm />
 			<CardsContainer>
 				{recipes.map((recipe, index) => {
 					return <RecipeCard key={Math.random()} recipe={recipe} />;
