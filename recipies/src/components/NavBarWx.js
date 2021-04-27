@@ -138,7 +138,7 @@ export default function NavBarWx() {
 			<nav key={Math.random()}>
 				<div className="nav-content">
 					<div id="logo-space">
-						<h3 className="logo">The Logo</h3>
+						<h3 className="logo">ReciPeazy</h3>
 					</div>
 					<ul className={isActive ? 'nav-links' : 'nav-links nav-active'}>
 						{linkNames.map((linkName, index) => {

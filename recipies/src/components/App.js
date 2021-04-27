@@ -4,6 +4,7 @@ import NavBarWx from './NavBarWx.js';
 import RecipeCard from './RecipeCard.js';
 import styled from 'styled-components';
 import RecipeForm from './RecipeForm';
+import LandingPage from './LandingPage';
 
 const CardsContainer = styled.div`
 	width: 80%;
@@ -75,7 +76,7 @@ function App() {
 	return (
 		<>
 			<NavBarWx />
-			<div>Main Image</div>
+			<LandingPage />
 			<RecipeForm />
 			<CardsContainer>
 				{recipes.map((recipe, index) => {
