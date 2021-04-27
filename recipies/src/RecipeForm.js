@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
 import './RecipeForm.css';
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faCoffee, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components'
 
+const Trash = styled.span`
+color:red;
+`
+const Check = styled.span`
+color:green;
+margin-left:50%;
+`
 
 const recipes = [
-    {name:'', email:'', recipeName:'', item1:'', instructions:''}
+    {source:'', email:'', recipeName:'', ingrediants:'', instructions:''}
 ]
 
 const initialValues = {
-    name: '',
+    source: '',
     email:'',
     recipeName: '',
-    item1:'',
+    ingrediants:'',
     instructions:'',
 }
 
 function Recipe(){
-    const [user, setUser] = useState(recipes);
+    const [recipe, setRecipe] = useState(recipes);
     const [formValues, setFormValues] = useState(initialValues);
 
 
@@ -29,14 +39,14 @@ function Recipe(){
 
     const submit = ev => {
         ev.preventDefault();
-        const newUser = {
-            name: formValues.name,
+        const newRecipe = {
+            source: formValues.source,
             email: formValues.email,
             recipeName: formValues.recipeName,
-            item1: formValues.item1,
+            ingrediants: formValues.ingrediants,
             instructions: formValues.instructions,
         }
-        axios.post('https://reqres.in/api/orders', newUser)
+        axios.post('https://reqres.in/api/orders', newRecipe)
         .then(res => {
             setFormValues(initialValues)
             console.log(initialValues)
@@ -49,28 +59,28 @@ function Recipe(){
     return (
             <div className='container'>
                 <h1>Recipe Card</h1>
-                {user.map((user,asd) => {
+                {recipe.map((recipe,asd) => {
                     return(
                         <div key={asd}>
-                            {user.name} {user.email} {user.recipeName} {user.instructions}
+                            {recipe.source} {recipe.email} {recipe.recipeName} {recipe.instructions}
                         </div>
                     )
                 })}
                 <form onSubmit={submit}>
                     <ul>
                     <li>
-                    Name:<input 
+                    Source:<input 
                         type='text'
                         onChange={change}
-                        value={formValues.name}
-                        name='name'
+                        value={formValues.source}
+                        name='source'
                         />
                     </li>
                     <li>
                     Email:<input 
                         type='text'
                         onChange={change}
-                        value={formValues.eamil}
+                        value={formValues.email}
                         name='email'
                         />
                     </li>
@@ -83,11 +93,11 @@ function Recipe(){
                         />
                     </li>
                     <li>
-                    item 1:<input 
+                    Ingrediants:<textarea 
                         type='text'
                         onChange={change}
-                        value={formValues.item1}
-                        name='item1'
+                        value={formValues.ingrediants}
+                        name='ingrediants'
                         />
                     </li>
                     <li>
@@ -95,12 +105,17 @@ function Recipe(){
                         type='text'
                         onChange={change}
                         value={formValues.instructions}
-                        name='name'
+                        name='instructions'
                         />
                     </li>
                     </ul>
                 </form>
-                <button>Submit</button>
+                    <Trash>
+                        <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+                    </Trash>
+                    <Check>
+                        <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+                    </Check>
             </div>
     )
 }
