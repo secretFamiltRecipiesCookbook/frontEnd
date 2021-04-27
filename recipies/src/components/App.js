@@ -5,6 +5,8 @@ import RecipeCard from './RecipeCard.js';
 import styled from 'styled-components';
 import RecipeForm from './RecipeForm';
 import LandingPage from './LandingPage';
+import LogInForm from './LogInForm';
+import SignUpForm from './SignUpForm';
 
 const CardsContainer = styled.div`
 	width: 80%;
@@ -69,7 +71,10 @@ const initialRecipe = [
 	}
 ];
 
+const dummyLogIn = { username: '', password: '' };
+
 function App() {
+	const [logInInfo, setLogInInfo] = useState(dummyLogIn);
 	// eslint-disable-next-line
 	const [recipes, setRecipes] = useState(initialRecipe);
 
@@ -77,6 +82,8 @@ function App() {
 		<>
 			<NavBarWx />
 			<LandingPage />
+			<LogInForm logInInfo={logInInfo} setLogInInfo={setLogInInfo} />
+			<SignUpForm logInInfo={logInInfo} setLogInInfo={setLogInInfo} />
 			<RecipeForm />
 			<CardsContainer>
 				{recipes.map((recipe, index) => {
