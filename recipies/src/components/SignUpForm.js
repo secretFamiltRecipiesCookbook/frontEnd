@@ -15,6 +15,10 @@ const SignUpFormDiv = styled.div`
 		background: linear-gradient(to right, #ccbe1d, #fc9471);
 		margin: 0 auto;
 		border-radius: 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 
 	h1 {
@@ -60,6 +64,15 @@ const SignUpFormDiv = styled.div`
 		justify-content: space-between;
 		width: 40%;
 	}
+	.cta-btn {
+		color: #ccbe1d;
+		font-size: 1.5rem;
+		background-color: white;
+		padding: 0.7rem 1rem;
+		border: none;
+		border-radius: 30px;
+		margin-bottom: 2rem;
+	}
 `;
 
 export default function SignUpForm({ logInInfo, setLogInInfo }) {
@@ -104,6 +117,7 @@ export default function SignUpForm({ logInInfo, setLogInInfo }) {
 						</li>
 					</ul>
 				</form>
+				<button className="cta-btn">SUBMIT</button>
 			</div>
 		</SignUpFormDiv>
 	);

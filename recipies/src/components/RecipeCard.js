@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+
 const RecipeCardDiv = styled.div`
 	*,
 	*:before,
@@ -119,6 +122,21 @@ const RecipeCardDiv = styled.div`
 	.preparation > p {
 		margin-bottom: 10px;
 	}
+	.buttons {
+		margin: 0% auto;
+		padding: 2% 0;
+		display: flex;
+		flex-flow: horizontal wrap;
+		justify-content: space-between;
+		width: 40%;
+	}
+`;
+
+const Trash = styled.span`
+	color: red;
+`;
+const Edit = styled.span`
+	color: green;
 `;
 
 export default function RecipeCard({ recipe }) {
@@ -153,6 +171,14 @@ export default function RecipeCard({ recipe }) {
 						{recipe.category.map(cate => {
 							return ` ${cate} `;
 						})}
+					</div>
+					<div className="buttons">
+						<Edit>
+							<FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+						</Edit>
+						<Trash>
+							<FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+						</Trash>
 					</div>
 				</article>
 			</div>
