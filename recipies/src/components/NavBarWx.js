@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Nav = styled.div`
-	/* colors: #ccbe1d, #e1e2e0 , #9bb4ec, #fc9471, #f01d1c */ /* the current color scheme */
 	nav {
 		display: flex;
 		justify-content: space-around;
@@ -13,7 +12,6 @@ const Nav = styled.div`
 	}
 
 	.logo {
-		/* color: rgb(226, 226, 226); */
 		color: #e1e2e0;
 		text-transform: uppercase;
 		letter-spacing: 5px;
@@ -113,7 +111,7 @@ const Nav = styled.div`
 	}
 `;
 
-const linkNames = ['Home', 'Recipes', 'Sign Up', 'Sign In'];
+const linkNames = ['Home', 'Search', 'Log In', 'Sign Up'];
 
 export default function NavBarWx() {
 	const [isActive, setIsActive] = useState(true);

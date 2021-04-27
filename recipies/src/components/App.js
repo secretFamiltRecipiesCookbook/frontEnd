@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../App.css';
 import NavBarWx from './NavBarWx.js';
 import RecipeCard from './RecipeCard.js';
+import styled from 'styled-components';
 
 const initialRecipe = [
 	{
@@ -50,9 +51,11 @@ function App() {
 		<>
 			<NavBarWx />
 			<div>Main Image</div>
-			{recipes.map((recipe, index) => {
-				return <RecipeCard key={index} recipe={recipe} />;
-			})}
+			<div className="cards-container">
+				{recipes.map((recipe, index) => {
+					return <RecipeCard key={index} recipe={recipe} />;
+				})}
+			</div>
 		</>
 	);
 }

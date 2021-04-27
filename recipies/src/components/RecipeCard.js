@@ -99,8 +99,7 @@ const RecipeCardDiv = styled.div`
 	}
 
 	.amount {
-		/* color: #1976d2; */
-		color: blue;
+		color: #9bb4ec;
 	}
 
 	.preparation > p {
