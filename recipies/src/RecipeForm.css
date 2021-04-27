@@ -1,0 +1,39 @@
+
+/*colors 
+RGBA(204,190,29,1)-yellow
+RGBA(225,226,224,1)-white
+RGBA(155,180,236,1)-skyblue
+RGBA(252,148,113,1)-tan
+RGBA(240,29,28,1)-red
+*/
+
+.container{
+    height:auto;
+    width:70%;
+    box-shadow: 0px 5px 10px RGBA(225,226,224,1);
+}
+
+ul{
+list-style-type: none;
+}
+
+li{
+display:flex;
+flex-flow:column wrap;
+justify-content: center;
+align-items: center;
+padding:1rem;
+margin:0.5rem;
+}
+
+input{
+    border-radius: 25px;
+    border:none;
+    width:500px;
+    height:50px;
+}
+
+textarea{
+    width:450px;
+    height:100px;
+}
