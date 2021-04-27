@@ -4,9 +4,29 @@ import NavBarWx from './NavBarWx.js';
 import RecipeCard from './RecipeCard.js';
 import styled from 'styled-components';
 
+const CardsContainer = styled.div`
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	/* TABLET ZONE */
+	@media screen and (max-width: 1024px) {
+    	justify-content: space-around;
+	}
+
+	/* MOBILE DESIGN  */
+	@media screen and (max-width: 768px) {
+	
+		}
+	}
+`;
+
 const initialRecipe = [
 	{
 		name: 'Cheesy Grd Beef Tacos',
+		source: 'Grandma Ethel',
 		ingredients: [
 			{ amount: '1', ingredient: 'large onion, chopped' },
 			{ amount: '1 lb.', ingredient: 'ground beef' },
@@ -23,11 +43,13 @@ const initialRecipe = [
 			'In a large skillet over medium-high heat, cook onion until soft, 6 minutes. Add beef and cook until no longer pink, 5 to 7 minutes more, then add tomatoes, black beans, and taco seasoning and season with salt. Stir until combined. Add cheese and stir until completely melted',
 			'Spoon mixture into flour tortillas and fold. Garnish with green onions and serve with sour cream.'
 		],
+		category: ['dinner', 'mexican'],
 		backgroundImage:
-			'https://moorlandseater.com/wp-content/uploads/2018/05/no-knead-bread-for-beginners-sliced-on-a-board-moorlands-eater-DSC07055.jpg'
+			'https://hips.hearstapps.com/del.h-cdn.co/assets/16/13/2048x2338/gallery-1459442142-delish-cheesy-ground-beef-tacos.jpg?resize=980:*'
 	},
 	{
 		name: 'Black Bean Tostadas',
+		source: 'Grandpa Jimmy',
 		ingredients: [
 			{ amount: '500 g', ingredient: 'mesa flour' },
 			{ amount: '17 g', ingredient: 'slow acting wet yeast' },
@@ -39,23 +61,25 @@ const initialRecipe = [
 			'Meanwhile, place tostadas on a large baking sheet and sprinkle cheese evenly over each. Bake until cheese is melty, about 5 minutes. ',
 			'Top tostadas with beans, avocado slices, and hot sauce.'
 		],
+		category: ['snack', 'mexican'],
 		backgroundImage:
 			'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-202101-blackbeantostadas-046-ls-1610740382.jpg?crop=0.835xw:1.00xh;0,0&resize=980:*'
 	}
 ];
 
 function App() {
+	// eslint-disable-next-line
 	const [recipes, setRecipes] = useState(initialRecipe);
 
 	return (
 		<>
 			<NavBarWx />
 			<div>Main Image</div>
-			<div className="cards-container">
+			<CardsContainer>
 				{recipes.map((recipe, index) => {
-					return <RecipeCard key={index} recipe={recipe} />;
+					return <RecipeCard key={Math.random()} recipe={recipe} />;
 				})}
-			</div>
+			</CardsContainer>
 		</>
 	);
 }

@@ -12,12 +12,13 @@ const RecipeCardDiv = styled.div`
 	}
 
 	#container {
-		width: 100%;
-		max-width: 400px;
+		/* width: 100%; */
+		max-width: 35vw;
+		min-width: 400px;
 		background: white;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 		border-radius: 20px;
-		margin: 5% 5% 0 0;
+		margin: 5% 0 0 0;
 		/* position: absolute; */
 		/* top: 50%; */
 		/* left: 50%; */
@@ -78,20 +79,30 @@ const RecipeCardDiv = styled.div`
 		max-height: 0px;
 		padding: 0 30px;
 	}
+	.source {
+		padding: 15px 30px;
+		font-size: 1.5rem;
+		color: #ccbe1d;
+	}
+
+	.category {
+		color: #f01d1c;
+		/* text-shadow: 0px 0px 0px black; */
+	}
 
 	.ingredients {
 		margin: 0px;
 		padding: 0px;
-		margin-bottom: 20px;
+		margin-bottom: 5px;
 		padding-left: 4px;
-		font-size: 0.9rem;
+		font-size: 1.1rem;
 		display: flex;
 		/* justify-content: space-between; */
 	}
 
 	.ingredients > li {
 		list-style-type: none;
-		margin: 4px 0px;
+		/* margin: 50px 0px; */
 	}
 
 	.ingredients > li > .amount {
@@ -100,6 +111,10 @@ const RecipeCardDiv = styled.div`
 
 	.amount {
 		color: #9bb4ec;
+	}
+
+	.preparation {
+		margin-top: 20px;
 	}
 
 	.preparation > p {
@@ -116,21 +131,28 @@ export default function RecipeCard({ recipe }) {
 				<header id="toggle">
 					<div className="header" style={{ backgroundImage: `url(${recipe.backgroundImage})` }}></div>
 					<div className="title">{recipe.name}</div>
+					<div className="source">{recipe.source}</div>
 				</header>
 				<article>
 					<ul>
 						{recipe.ingredients.map((ingredient, index) => {
 							return (
-								<li key="index" className="ingredients">
+								<li key={Math.random()} className="ingredients">
 									<div className="amount">{ingredient.amount} -</div>
-									<div className="ingredient"> - {ingredient.ingredient}</div>
+									<div className="ingredient"> > {ingredient.ingredient}</div>
 								</li>
 							);
 						})}
 					</ul>
 					<div className="preparation">
 						{recipe.directions.map((direction, index) => {
-							return <p key="index">{direction}</p>;
+							return <p key={Math.random()}>{direction}</p>;
+						})}
+					</div>
+					<div className="category">
+						category:
+						{recipe.category.map(cate => {
+							return ` ${cate} `;
 						})}
 					</div>
 				</article>
