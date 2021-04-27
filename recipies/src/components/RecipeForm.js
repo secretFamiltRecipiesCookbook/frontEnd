@@ -173,12 +173,16 @@ function RecipeForm(){
                     </ul>
                 </form>
                 <div className='buttons'>
-                    <Trash onSubmit={submit}>
-                        <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-                    </Trash>
-                    <Check onSubmit={submit}>
-                        <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
-                    </Check>
+                    <button>
+                        <Trash>
+                            <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+                        </Trash>
+                    </button>
+                    <button onSubmit={submit}>
+                        <Check>
+                            <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+                        </Check>
+                    </button>
                 </div>
             </div>
         </RecipeFormStyle>
