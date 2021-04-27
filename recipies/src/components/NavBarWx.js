@@ -79,10 +79,11 @@ const Nav = styled.div`
 			position: absolute;
 			right: 0px;
 			height: 92vh;
-			top: 8vh;
-			background: linear-gradient(to right, #ccbe1d, #fc9471);
+			top: 6.7vh;
+			background: linear-gradient(to right, #e1ac44, #fc9471);
 			display: flex;
 			flex-direction: column;
+			justify-content: space-around;
 			align-items: center;
 			width: 50%;
 			transform: translateX(100%);
@@ -100,6 +101,7 @@ const Nav = styled.div`
 	/* ANIMATIONS  */
 	.nav-active {
 		transform: translateX(0%);
+		z-index: 5;
 	}
 
 	@keyframes navLinkFade {

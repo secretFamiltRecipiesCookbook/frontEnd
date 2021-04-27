@@ -87,7 +87,6 @@ const RecipeCardDiv = styled.div`
 
 	.category {
 		color: #f01d1c;
-		/* text-shadow: 0px 0px 0px black; */
 	}
 
 	.ingredients {
