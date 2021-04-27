@@ -138,7 +138,7 @@ export default function RecipeCard({ recipe }) {
 							return (
 								<li key={Math.random()} className="ingredients">
 									<div className="amount">{ingredient.amount} -</div>
-									<div className="ingredient"> > {ingredient.ingredient}</div>
+									<div className="ingredient"> {ingredient.ingredient}</div>
 								</li>
 							);
 						})}
