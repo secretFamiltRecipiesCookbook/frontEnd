@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Nav = styled.div`
@@ -152,7 +153,7 @@ export default function NavBarWx() {
 												: { animation: `navLinkFade 0.5s ease forwards ${index / 7 + 0.15}s` }
 										}
 									>
-										<a key={Math.random()} href="www.google.com">
+										<a key={Math.random()} >
 											{linkName}
 										</a>
 									</li>

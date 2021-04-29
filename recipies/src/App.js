@@ -1,31 +1,16 @@
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import React, { useState } from 'react';
-import '../App.css';
-import NavBarWx from './NavBarWx.js';
-import RecipeCard from './RecipeCard.js';
-import styled from 'styled-components';
-import RecipeForm from './RecipeForm';
-import LandingPage from './LandingPage';
-import LogInForm from './LogInForm';
-import SignUpForm from './SignUpForm';
+import './App.css';
 
-const CardsContainer = styled.div`
-	width: 80%;
-	margin: 0 auto;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
 
-	/* TABLET ZONE */
-	@media screen and (max-width: 1024px) {
-    	justify-content: space-around;
-	}
+import AddRecipeForm from './components/AddRecipeForm';
+import LandingPage from './components/LandingPage';
+import LogInForm from './components/LogInForm';
+import SignUpForm from './components/SignUpForm';
+import PrivateRoute from "./components/PrivateRoute";
+import RecipeList from './components/RecipeList';
 
-	/* MOBILE DESIGN  */
-	@media screen and (max-width: 768px) {
-	
-		}
-	}
-`;
+
 
 const initialRecipe = [
 	{
@@ -79,18 +64,16 @@ function App() {
 	const [recipes, setRecipes] = useState(initialRecipe);
 
 	return (
-		<>
-			<NavBarWx />
-			<LandingPage />
-			<LogInForm logInInfo={logInInfo} setLogInInfo={setLogInInfo} />
-			<SignUpForm logInInfo={logInInfo} setLogInInfo={setLogInInfo} />
-			<RecipeForm />
-			<CardsContainer>
-				{recipes.map((recipe, index) => {
-					return <RecipeCard key={Math.random()} recipe={recipe} />;
-				})}
-			</CardsContainer>
-		</>
+		<div className = 'app'>
+		<Router>
+			<Route exact path = '/' component = {LandingPage} />
+			<Route exact path = '/signup' component = {SignUpForm} />
+			<Route exact path = '/login' component = {LogInForm} />
+			<PrivateRoute  path = '/recipes' component ={RecipeList} />
+			<PrivateRoute path = '/add-recipe' component = {AddRecipeForm} />
+			
+		</Router>
+		</div>
 	);
 }
 
