@@ -147,11 +147,12 @@ export default function RecipeCard({ recipe }) {
 			<div className={isOpen ? '' : 'closed'} id="container" onClick={() => setIsOpen(!isOpen)}>
 				<header id="toggle">
 					<div className="header" style={{ backgroundImage: `url(${recipe.backgroundImage})` }}></div>
-					<div className="title">{recipe.name}</div>
+					<div className="title">{recipe.title}</div>
 					<div className="source">{recipe.source}</div>
 				</header>
 				<article>
-					<ul>
+					<p>{recipe.ingredients}</p>
+					{/* <ul>
 						{recipe.ingredients.map((ingredient, index) => {
 							return (
 								<li key={Math.random()} className="ingredients">
@@ -160,17 +161,13 @@ export default function RecipeCard({ recipe }) {
 								</li>
 							);
 						})}
-					</ul>
+					</ul> */}
 					<div className="preparation">
-						{recipe.directions.map((direction, index) => {
-							return <p key={Math.random()}>{direction}</p>;
-						})}
+					<p>{recipe.instructions}</p>
 					</div>
 					<div className="category">
 						category:
-						{recipe.category.map(cate => {
-							return ` ${cate} `;
-						})}
+						<p>{recipe.category}</p>
 					</div>
 					<div className="buttons">
 						<Edit>

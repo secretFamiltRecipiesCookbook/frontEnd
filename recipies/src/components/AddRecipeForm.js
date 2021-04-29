@@ -75,7 +75,7 @@ const initialValues = {
     category:'',
 }
 
-function RecipeForm(){
+function AddRecipeForm(){
     const [recipe, setRecipe] = useState(recipes);
     const [formValues, setFormValues] = useState(initialValues);
 
@@ -125,7 +125,7 @@ function RecipeForm(){
                         type='text'
                         onChange={change}
                         value={formValues.title}
-                        name='email'
+                        name='title'
                         />
                     </li>
                     <li>
@@ -173,16 +173,16 @@ function RecipeForm(){
                     </ul>
                 </form>
                 <div className='buttons'>
-                    <Trash onSubmit={submit}>
+                    <button Trash onSubmit={submit}>
                         <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-                    </Trash>
-                    <Check onSubmit={submit}>
+                    </button>
+                    <button onSubmit={submit}>
                         <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
-                    </Check>
+                    </button>
                 </div>
             </div>
         </RecipeFormStyle>
     )
 }
 
-export default RecipeForm
+export default AddRecipeForm;

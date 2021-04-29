@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import MarketingNav from '../Navs/marketingNav';
 
 const LandingPageStyle = styled.div`
 	width: 100%;
@@ -32,9 +33,10 @@ const LandingPageStyle = styled.div`
 export default function LandingPage() {
 	return (
 		<LandingPageStyle>
+			<MarketingNav />
 			<section className="hero">
+			
 				<h1 className="pageTitle">ReciPeazy</h1>
-				<button className="cta-btn">Sign Up Now!</button>
 			</section>
 		</LandingPageStyle>
 	);

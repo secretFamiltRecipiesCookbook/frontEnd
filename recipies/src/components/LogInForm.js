@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios'
+import { axiosWithAuth } from './utils/axiosWithAuth';
 
 const LogInFormStyle = styled.div`
 	* {
@@ -74,15 +77,57 @@ const LogInFormStyle = styled.div`
 		margin-bottom: 2rem;
 	}
 `;
+const initialFormValues = {
+	username: "",
+	password: "",
+  };
+  
+  const initialFormErrors = {
+	username: "",
+	password: "",
+  };
+  
+  const initialUsers = [];
+  const initialDisabled = true;
 
-export default function LogInForm({ logInInfo, setLogInInfo }) {
+export default function LogInForm(props) {
+
+	const [formValues, setFormValues] = useState(initialFormValues);
+
+	const [disabled, setDisabled] = useState(initialDisabled);
+
+	const [users, setUsers] = useState(initialUsers);
+
+	const { push } = useHistory();
+
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+		console.log (users)
+		axios
+		.post('https://buildweekrecipes.herokuapp.com/api/auth/login', users)
+		.then((res) => {
+			
+			localStorage.setItem('token', res.data.token);
+			push('./recipes');
+			console.log(res.data.token);
+		})
+		.catch((err) => {
+			console.log('Username or password not valid.', err);
+		})
+	};
 	// const change = ev => {
 	// 	const { name, value } = ev.target;
 	// 	console.log(name);
 	// 	console.log(value);
 	// 	setFormValues({ ...formValues, [name]: value });
 	// };
-
+const onChange = (e) => {
+	setUsers({
+		...users,
+		[e.target.name]: e.target.value,
+	})
+};
 	// const submit = ev => {
 	// 	ev.preventDefault();
 	// 	const newRecipe = {
@@ -103,22 +148,24 @@ export default function LogInForm({ logInInfo, setLogInInfo }) {
 
 	return (
 		<LogInFormStyle>
+			<form onSubmit={ onSubmit }>
 			<div className="container">
 				<h1>Log In</h1>
 				<form>
 					<ul>
 						<li>
 							User Name:
-							<input type="text" onChange={() => console.log('username changing')} name="username" />
+							<input type="text" value={users.username} onChange={onChange} name="username" />
 						</li>
 						<li>
 							Password:
-							<input type="password" onChange={() => console.log('password changing')} name="password" />
+							<input type="password" onChange={onChange} name="password" />
 						</li>
 					</ul>
 				</form>
 				<button className="cta-btn">Log in</button>
 			</div>
+			</form>
 		</LogInFormStyle>
 	);
 }

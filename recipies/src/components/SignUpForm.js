@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState}from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const SignUpFormDiv = styled.div`
 	* {
@@ -74,8 +76,29 @@ const SignUpFormDiv = styled.div`
 		margin-bottom: 2rem;
 	}
 `;
-
-export default function SignUpForm({ logInInfo, setLogInInfo }) {
+const initialForm = {
+	username: '',
+	phone_number: '',
+	password: '',
+  }
+  
+  const initialFormErrors = {
+	username: '',
+	phone_number: '',
+	password: '',
+  }
+  
+  const initialDisabled = true
+  
+ 
+  
+  
+export default function SignUpForm() {
+	
+  const [user, setUser] = useState(initialForm);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [disabled, setDisabled] = useState(initialDisabled);
+  const { push } = useHistory();
 	// const change = ev => {
 	// 	const { name, value } = ev.target;
 	// 	console.log(name);
@@ -100,6 +123,24 @@ export default function SignUpForm({ logInInfo, setLogInInfo }) {
 	// 		})
 	// 		.catch(err => {});
 	// };
+	const onChange = (e) => {
+		setUser({
+		  ...user,
+		  [e.target.name]: e.target.value
+		})}
+	  
+		const onSubmit = (e) => {
+		  e.preventDefault();
+		  axios
+		  .post('https://buildweekrecipes.herokuapp.com/api/auth/register', user)
+		  .then((res) => {
+			push('./recipes');
+			console.log(res.data);
+		  })
+		  .catch((err) =>{
+			console.log('Username or password not valid, must be unique username.', err);
+		  })
+		}
 
 	return (
 		<SignUpFormDiv>
@@ -109,15 +150,15 @@ export default function SignUpForm({ logInInfo, setLogInInfo }) {
 					<ul>
 						<li>
 							User Name:
-							<input type="text" onChange={() => console.log('username changing')} name="username" />
+							<input type="text" onChange={onChange} name="username" />
 						</li>
 						<li>
 							Password:
-							<input type="password" onChange={() => console.log('password changing')} name="password" />
+							<input type="password" onChange={onChange} name="password" />
 						</li>
 					</ul>
 				</form>
-				<button className="cta-btn">SUBMIT</button>
+				<button onClick = {onSubmit} className="cta-btn">SUBMIT</button>
 			</div>
 		</SignUpFormDiv>
 	);
