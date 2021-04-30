@@ -18,7 +18,6 @@ export const fetchRecipes = () => {
         axiosWithAuth()
             .get('/api/recipes/')
             .then((res) => {
-                console.log(res.data);
                 dispatch({ type: FETCH_SUCCESS, payload: res.data })
             })
             .catch(err => {
@@ -31,6 +30,7 @@ export const addRecipe = (recipe) =>{
     axiosWithAuth()
         .post('/api/recipes/',recipe)
     .then((res) => {
+        console.log(res.data)
         dispatch({ type: RECIPE_ADD, payload: res.data })
     })
     .catch( error => { console.log( error.response.request._response ) });

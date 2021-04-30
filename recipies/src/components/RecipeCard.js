@@ -146,7 +146,7 @@ export default function RecipeCard({ recipe }) {
 		<RecipeCardDiv>
 			<div className={isOpen ? '' : 'closed'} id="container" onClick={() => setIsOpen(!isOpen)}>
 				<header id="toggle">
-					<div className="header" style={{ backgroundImage: `url(${recipe.backgroundImage})` }}></div>
+					<div className="header" style={{ image: `url(${recipe.image})` }}></div>
 					<div className="title">{recipe.title}</div>
 					<div className="source">{recipe.source}</div>
 				</header>
