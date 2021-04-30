@@ -29,11 +29,12 @@ const Nav = styled.div`
 	.nav-links {
 		display: flex;
 		justify-content: space-between;
-		width: 40%;
+		width: 50%;
 	}
 
 	.nav-links li {
 		list-style: none;
+		width: 100%;
 	}
 
 	.nav-links a {
@@ -42,7 +43,7 @@ const Nav = styled.div`
 		text-decoration: none;
 		letter-spacing: 3px;
 		font-weight: bold;
-		font-size: 24px;
+		font-size: 10px;
 	}
 
 	.burger {
@@ -153,7 +154,7 @@ export default function NavBarWx() {
 												: { animation: `navLinkFade 0.5s ease forwards ${index / 7 + 0.15}s` }
 										}
 									>
-										<a key={Math.random()} >
+										<a href="#" key={Math.random()}>
 											{linkName}
 										</a>
 									</li>

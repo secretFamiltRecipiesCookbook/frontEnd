@@ -6,7 +6,7 @@ const LandingPageStyle = styled.div`
 	width: 100%;
 
 	.hero {
-		height: 80vh;
+		height: 90vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -35,7 +35,6 @@ export default function LandingPage() {
 		<LandingPageStyle>
 			<MarketingNav />
 			<section className="hero">
-			
 				<h1 className="pageTitle">ReciPeazy</h1>
 			</section>
 		</LandingPageStyle>

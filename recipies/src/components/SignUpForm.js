@@ -1,9 +1,20 @@
-import React, {useState}from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const SignUpFormDiv = styled.div`
+	background-image: url('https://cdn6.dissolve.com/p/D985_49_098/D985_49_098_1200.jpg');
+	height: 100vh;
+	width: 100vw;
+	background: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	display: grid;
+	place-items: center;
+
 	* {
 		margin: 0;
 		padding: 0;
@@ -79,26 +90,22 @@ const SignUpFormDiv = styled.div`
 const initialForm = {
 	username: '',
 	phone_number: '',
-	password: '',
-  }
-  
-  const initialFormErrors = {
+	password: ''
+};
+
+const initialFormErrors = {
 	username: '',
 	phone_number: '',
-	password: '',
-  }
-  
-  const initialDisabled = true
-  
- 
-  
-  
+	password: ''
+};
+
+const initialDisabled = true;
+
 export default function SignUpForm() {
-	
-  const [user, setUser] = useState(initialForm);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(initialDisabled);
-  const { push } = useHistory();
+	const [user, setUser] = useState(initialForm);
+	const [formErrors, setFormErrors] = useState(initialFormErrors);
+	const [disabled, setDisabled] = useState(initialDisabled);
+	const { push } = useHistory();
 	// const change = ev => {
 	// 	const { name, value } = ev.target;
 	// 	console.log(name);
@@ -123,24 +130,25 @@ export default function SignUpForm() {
 	// 		})
 	// 		.catch(err => {});
 	// };
-	const onChange = (e) => {
+	const onChange = e => {
 		setUser({
-		  ...user,
-		  [e.target.name]: e.target.value
-		})}
-	  
-		const onSubmit = (e) => {
-		  e.preventDefault();
-		  axios
-		  .post('https://buildweekrecipes.herokuapp.com/api/auth/register', user)
-		  .then((res) => {
-			push('./recipes');
-			console.log(res.data);
-		  })
-		  .catch((err) =>{
-			console.log('Username or password not valid, must be unique username.', err);
-		  })
-		}
+			...user,
+			[e.target.name]: e.target.value
+		});
+	};
+
+	const onSubmit = e => {
+		e.preventDefault();
+		axios
+			.post('https://buildweekrecipes.herokuapp.com/api/auth/register', user)
+			.then(res => {
+				push('./recipes');
+				console.log(res.data);
+			})
+			.catch(err => {
+				console.log('Username or password not valid, must be unique username.', err);
+			});
+	};
 
 	return (
 		<SignUpFormDiv>
@@ -158,7 +166,9 @@ export default function SignUpForm() {
 						</li>
 					</ul>
 				</form>
-				<button onClick = {onSubmit} className="cta-btn">SUBMIT</button>
+				<button onClick={onSubmit} className="cta-btn">
+					SUBMIT
+				</button>
 			</div>
 		</SignUpFormDiv>
 	);
