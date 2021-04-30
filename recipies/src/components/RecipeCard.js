@@ -143,16 +143,13 @@ const Edit = styled.span`
 
 export default function RecipeCard({ recipe }) {
 	const [isOpen, setIsOpen] = useState(false);
-	// let history = useHistory()
+	let history = useHistory()
 	const deleteRecipe = () => {
-		// console.log(recipe)
-		// if(recipe.source === "Grandma") {
-		// 	alert("Sorry, you cannot delete grandma's best recipies!")
-		// }
+
 
 		axiosWithAuth().delete(`https://buildweekrecipes.herokuapp.com/api/recipes/${recipe.recipe_id}`)
 		.then((res)=>{
-			// history.go(0)
+			history.go(0)
 	
 		})
 		.catch((err) =>{
