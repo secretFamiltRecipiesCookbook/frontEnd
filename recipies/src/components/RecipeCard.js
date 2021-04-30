@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import {axiosWithAuth} from '../components/utils/axiosWithAuth'	
+import {useHistory} from 'react-router-dom'	
 
 const RecipeCardDiv = styled.div`
 	*,
@@ -141,6 +143,19 @@ const Edit = styled.span`
 
 export default function RecipeCard({ recipe }) {
 	const [isOpen, setIsOpen] = useState(false);
+	let history = useHistory()
+	const deleteRecipe = () => {
+
+
+		axiosWithAuth().delete(`https://buildweekrecipes.herokuapp.com/api/recipes/${recipe.recipe_id}`)
+		.then((res)=>{
+			history.go(0)
+	
+		})
+		.catch((err) =>{
+			console.log(err.response)
+		})
+	  };
 
 	return (
 		<RecipeCardDiv>
@@ -174,7 +189,7 @@ export default function RecipeCard({ recipe }) {
 							<FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
 						</Edit>
 						<Trash>
-							<FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+							<FontAwesomeIcon onClick={deleteRecipe} icon={faTrash}></FontAwesomeIcon>
 						</Trash>
 					</div>
 				</article>
