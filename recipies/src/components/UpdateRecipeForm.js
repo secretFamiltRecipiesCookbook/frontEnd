@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
@@ -88,25 +88,29 @@ const UpdateRecipeForm = (props) => {
 
         
     const [recipeToEdit, setRecipeToEdit] = useState(initialFormValues);
-
-    const id = useParams();
+    const { id } = useParams();
     
 
     useEffect(() => {
-        // axiosWithAuth()
-        // .get(`/api/recipes/${id}`)
-        // .then((res) => {
-        //     console.log(res.data)
-        //     setRecipeToEdit(res.data)
-        // })
-        // console.log(id)
-        console.log('This is id from useParams: ', id);
-        fetchSingleRecipe(props)
+        fetchSingleRecipe(id);
     }, []);
+
+    // useEffect(() => {
+    //     const {title, source, category, ingredients, instructions } = props.recipe
+    //     setRecipeToEdit(
+    //         {
+    //             title: title,
+    //             source: source,
+    //             category: category,
+    //             ingredients: ingredients,
+    //             instructions: instructions
+    //         }
+    //     )
+    // }, [props.recipe])
     
     const handleChange = e => {
-        setState({
-            ...state,
+        setRecipeToEdit({
+            ...recipeToEdit,
             [e.target.name]:e.target.value
         });
     }
@@ -132,16 +136,16 @@ const UpdateRecipeForm = (props) => {
                     Title:<input 
                         type='text'
                         onChange={handleChange}
-                        value={state.title}
+                        value={recipeToEdit.title}
                         name='title'
-    
+                        
                         />
                     </li>
                     <li>
                     Source:<input 
                         type='text'
                         onChange={handleChange}
-                        value={state.source}
+                        value={recipeToEdit.source}
                         name='source'
                         
                         />
@@ -152,7 +156,7 @@ const UpdateRecipeForm = (props) => {
                         Category:<input
                         type='text'
                         onChange={handleChange}
-                        value={state.category}
+                        value={recipeToEdit.category}
                         name='category'
                         
                         />
@@ -161,7 +165,7 @@ const UpdateRecipeForm = (props) => {
                     Ingredients:<textarea 
                         type='text'
                         onChange={handleChange}
-                        value={state.ingredients}
+                        value={recipeToEdit.ingredients}
                         name='ingredients'
                         
                         />
@@ -170,7 +174,7 @@ const UpdateRecipeForm = (props) => {
                     instructions:<textarea 
                         type='text'
                         onChange={handleChange}
-                        value={state.instructions}
+                        value={recipeToEdit.instructions}
                         name='instructions'
                         />
                     </li>
@@ -193,7 +197,7 @@ const UpdateRecipeForm = (props) => {
 
 const mapStateToProps = state => {
     return({
-        ...state,
+        recipe: state.recipe,
         errorMessage: state.error
     })
 }

@@ -4,7 +4,7 @@ import './App.css';
 
 
 import AddRecipeForm from './components/AddRecipeForm';
-import UpdateRecipeForm from './components/AddRecipeForm';
+import UpdateRecipeForm from './components/UpdateRecipeForm';
 import LandingPage from './components/LandingPage';
 import LogInForm from './components/LogInForm';
 import SignUpForm from './components/SignUpForm';
