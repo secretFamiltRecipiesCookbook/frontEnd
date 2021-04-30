@@ -86,7 +86,7 @@ const AddRecipeForm = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
             props.addRecipe(state);
-            push(`/recipes`)
+            push('./recipes')
     }
 
     
@@ -95,8 +95,9 @@ const AddRecipeForm = (props) => {
     return (
         <RecipeFormStyle>
             <div className='container'>
+                
                 <h1>Recipe Card</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <ul>
                     <li>
                     Title:<input 
@@ -149,10 +150,10 @@ const AddRecipeForm = (props) => {
                     </ul>
                 
                 <div className='buttons'>
-                    <button onClick={handleSubmit}>
+                    <button >
                         <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                     </button>
-                    <button onSubmit={handleSubmit}>
+                    <button >
                         <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
                     </button>
                 </div>
