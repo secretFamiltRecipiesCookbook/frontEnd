@@ -5,6 +5,8 @@ import RecipeCard from './RecipeCard';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
+// import nav components
+
 const CardsContainer = styled.div`
 	width: 80%;
 	margin: 0 auto;
@@ -39,27 +41,30 @@ background: linear-gradient(to right, #ccbe1d, #fc9471);
 `
 
 const RecipeList = (props) => {
-
 const { push } = useHistory();
-
 const {fetchRecipes} = props;
+
 useEffect(() => {
     fetchRecipes();
-},[] );
+},[fetchRecipes]);
 if (props.isLoading) {
     return <h1>Loading...</h1>;
 }
-
 
 const handleAddRecipe = (e) => {
 	e.preventDefault();
 	push('/add-recipe')
 }
+
 return( 
 		<Div>
+			{
+				// adds Nav component for styling purposes
+			}
             <CardsContainer>
 				{props.recipes.map((recipe) => {
-					return <RecipeCard key={Math.random()} recipe={recipe} />;
+					// console.log(recipe)
+					return <RecipeCard key={Math.random()} recipe={recipe} handleAddRecipe={handleAddRecipe} />;
 				})}
 				
 			</CardsContainer>
@@ -69,15 +74,6 @@ return(
         }
 
 
-
-
-
-
-
-
-
-
-           
 const mapStateToProps = (state) => {
     return {
       ...state

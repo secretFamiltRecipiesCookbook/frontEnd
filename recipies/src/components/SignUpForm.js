@@ -80,25 +80,23 @@ const initialForm = {
 	username: '',
 	phone_number: '',
 	password: '',
-  }
-  
-  const initialFormErrors = {
+};
+
+const initialFormErrors = {
 	username: '',
 	phone_number: '',
 	password: '',
-  }
-  
-  const initialDisabled = true
-  
- 
-  
-  
+};
+
+const initialDisabled = true
+
+
 export default function SignUpForm() {
 	
-  const [user, setUser] = useState(initialForm);
-  const [formErrors, setFormErrors] = useState(initialFormErrors);
-  const [disabled, setDisabled] = useState(initialDisabled);
-  const { push } = useHistory();
+const [user, setUser] = useState(initialForm);
+const [formErrors, setFormErrors] = useState(initialFormErrors);
+const [disabled, setDisabled] = useState(initialDisabled);
+const { push } = useHistory();
 	// const change = ev => {
 	// 	const { name, value } = ev.target;
 	// 	console.log(name);
@@ -125,21 +123,21 @@ export default function SignUpForm() {
 	// };
 	const onChange = (e) => {
 		setUser({
-		  ...user,
-		  [e.target.name]: e.target.value
+			...user,
+			[e.target.name]: e.target.value
 		})}
-	  
+		
 		const onSubmit = (e) => {
-		  e.preventDefault();
-		  axios
-		  .post('https://buildweekrecipes.herokuapp.com/api/auth/register', user)
-		  .then((res) => {
+			e.preventDefault();
+			axios
+			.post('https://buildweekrecipes.herokuapp.com/api/auth/register', user)
+			.then((res) => {
 			push('./recipes');
 			console.log(res.data);
-		  })
-		  .catch((err) =>{
+			})
+			.catch((err) =>{
 			console.log('Username or password not valid, must be unique username.', err);
-		  })
+			})
 		}
 
 	return (

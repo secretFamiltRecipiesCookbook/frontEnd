@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 const RecipeCardDiv = styled.div`
 	*,
@@ -142,6 +143,15 @@ const Edit = styled.span`
 export default function RecipeCard({ recipe }) {
 	const [isOpen, setIsOpen] = useState(false);
 
+	const { push } = useHistory();
+
+	const handleEditRecipe = (e) => {
+		e.preventDefault();
+		push(`/edit-recipe/${recipe.recipe_id}`)
+	}
+
+	// console.log(recipe)
+
 	return (
 		<RecipeCardDiv>
 			<div className={isOpen ? '' : 'closed'} id="container" onClick={() => setIsOpen(!isOpen)}>
@@ -171,7 +181,7 @@ export default function RecipeCard({ recipe }) {
 					</div>
 					<div className="buttons">
 						<Edit>
-							<FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+							<FontAwesomeIcon icon={faEdit} onClick={handleEditRecipe}></FontAwesomeIcon>
 						</Edit>
 						<Trash>
 							<FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>

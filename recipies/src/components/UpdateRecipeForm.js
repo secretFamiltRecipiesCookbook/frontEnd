@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-// import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
-import {useHistory} from 'react-router';
-import {setError, addRecipe} from './../Actions/actions';
+import {
+    useHistory,
+    useParams
+} from 'react-router';
+import {fetchSingleRecipe} from './../Actions/actions.js';
+
+import {setError, editRecipe} from '../Actions/actions';
 import { connect } from "react-redux";
+import axios from 'axios';
+import { axiosWithAuth } from './utils/axiosWithAuth.js';
+
 
 const RecipeFormStyle = styled.div`
 .container{
@@ -58,23 +65,44 @@ textarea{
 }
 
 `
-// const Trash = styled.span`
-// color:red;
-// `
-// const Check = styled.span`
-// color:green;
-// `
+const Trash = styled.span`
+color:red;
+`
+const Check = styled.span`
+color:green;
+`
 
-
-const AddRecipeForm = (props) => {
-        
-    const [state,setState] = useState({
+const initialFormValues = {
     source: '',
     title:'',
     ingredients:'',
     instructions:'',
     category:'',
-}) 
+};
+
+
+const UpdateRecipeForm = (props) => {
+
+    // pull info from specific id
+    // console.log(useParams())
+
+        
+    const [recipeToEdit, setRecipeToEdit] = useState(initialFormValues);
+
+    const id = useParams();
+    
+
+    useEffect(() => {
+        // axiosWithAuth()
+        // .get(`/api/recipes/${id}`)
+        // .then((res) => {
+        //     console.log(res.data)
+        //     setRecipeToEdit(res.data)
+        // })
+        // console.log(id)
+        console.log('This is id from useParams: ', id);
+        fetchSingleRecipe(props)
+    }, []);
     
     const handleChange = e => {
         setState({
@@ -86,12 +114,13 @@ const AddRecipeForm = (props) => {
     
     const handleSubmit = e => {
         e.preventDefault();
-            props.addRecipe(state);
+            props.editRecipe();
             push(`/recipes`)
     }
 
-    // console.log(state);  
-
+    // console.log(state);
+    // const { id } = useParams();
+    // console.log(id);
 
     return (
         <RecipeFormStyle>
@@ -136,7 +165,7 @@ const AddRecipeForm = (props) => {
                         name='ingredients'
                         
                         />
-                    </li>
+                    </li> 
                     <li>
                     instructions:<textarea 
                         type='text'
@@ -149,8 +178,6 @@ const AddRecipeForm = (props) => {
                     </ul>
                 
                 <div className='buttons'>
-                    { // check if ID is a specific button, if the other one then choose the 'delete route', else submit with the check button
-                     }
                     <button onClick={handleSubmit}>
                         <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                     </button>
@@ -166,8 +193,9 @@ const AddRecipeForm = (props) => {
 
 const mapStateToProps = state => {
     return({
+        ...state,
         errorMessage: state.error
     })
 }
 
-export default  connect(mapStateToProps, {setError, addRecipe})(AddRecipeForm);
+export default  connect(mapStateToProps, {setError, editRecipe})(UpdateRecipeForm);

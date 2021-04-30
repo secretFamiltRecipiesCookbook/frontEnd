@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios'
-import { axiosWithAuth } from './utils/axiosWithAuth';
+// import { axiosWithAuth } from './utils/axiosWithAuth';
 
 const LogInFormStyle = styled.div`
 	* {
@@ -77,24 +77,24 @@ const LogInFormStyle = styled.div`
 		margin-bottom: 2rem;
 	}
 `;
-const initialFormValues = {
-	username: "",
-	password: "",
-  };
+// const initialFormValues = {
+// 	username: "",
+// 	password: "",
+// };
   
-  const initialFormErrors = {
-	username: "",
-	password: "",
-  };
+//   const initialFormErrors = {
+// 	username: "",
+// 	password: "",
+//   };
   
-  const initialUsers = [];
-  const initialDisabled = true;
+const initialUsers = [];
+// const initialDisabled = true;
 
 export default function LogInForm(props) {
 
-	const [formValues, setFormValues] = useState(initialFormValues);
+	// const [formValues, setFormValues] = useState(initialFormValues);
 
-	const [disabled, setDisabled] = useState(initialDisabled);
+	// const [disabled, setDisabled] = useState(initialDisabled);
 
 	const [users, setUsers] = useState(initialUsers);
 

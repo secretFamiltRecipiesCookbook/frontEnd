@@ -1,9 +1,10 @@
-import { FETCH_START, FETCH_SUCCESS, FETCH_ERR, SET_ERR, RECIPE_ADD } from '../Actions/actions.js';
+import { FETCH_START, FETCH_SUCCESS, FETCH_ERR, SET_ERR, RECIPE_ADD, FETCH_SUCCESS_ONE_RECIPE } from '../Actions/actions.js';
 
 
 
 export const initialState = {
     recipes: [],
+    recipe: {},
     isLoading: false,
     error:''
 }
@@ -19,6 +20,13 @@ const reducer = (state = initialState, action)=>{
                 ...state,
                 isLoading: false,
                 recipes: action.payload,
+                error: ''
+            }
+        case FETCH_SUCCESS_ONE_RECIPE:
+            return {
+                ...state,
+                isLoading: false,
+                recipe: action.payload,
                 error: ''
             }
         case FETCH_ERR:
