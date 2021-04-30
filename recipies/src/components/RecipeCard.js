@@ -192,7 +192,7 @@ export default function RecipeCard({ recipe }) {
 							<FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
 						</Edit>
 						<Trash>
-							<FontAwesomeIcon Onclick={deleteRecipe} icon={faTrash}></FontAwesomeIcon>
+							<FontAwesomeIcon onClick={deleteRecipe} icon={faTrash}></FontAwesomeIcon>
 						</Trash>
 					</div>
 				</article>
