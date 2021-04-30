@@ -3,7 +3,9 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
-
+import {useHistory} from 'react-router';
+import {setError, addRecipe} from './../Actions/actions';
+import { connect } from "react-redux";
 const RecipeFormStyle = styled.div`
 .container{
     height:auto;
@@ -62,127 +64,108 @@ const Check = styled.span`
 color:green;
 `
 
-const recipes = [
-    {source:'', title:'', recipeName:'', ingrediants:'', instructions:'', category:'',}
-]
 
-const initialValues = {
+const AddRecipeForm = (props) => {
+        
+    const [state,setState] = useState({
     source: '',
     title:'',
-    recipeName: '',
-    ingrediants:'',
+    ingredients:'',
     instructions:'',
     category:'',
-}
-
-function AddRecipeForm(){
-    const [recipe, setRecipe] = useState(recipes);
-    const [formValues, setFormValues] = useState(initialValues);
-
-
-    const change = ev => {
-        const { name, value } = ev.target
-        console.log(name)
-        console.log(value)
-        setFormValues({...formValues, [name]: value})
+}) 
+    
+    const handleChange = e => {
+        setState({
+            ...state,
+            [e.target.name]:e.target.value
+        });
+    }
+    const { push } = useHistory();
+    
+    const handleSubmit = e => {
+        e.preventDefault();
+            props.addRecipe(state);
+            push(`/recipes`)
     }
 
-    const submit = ev => {
-        ev.preventDefault();
-        const newRecipe = {
-            source: formValues.source,
-            title: formValues.title,
-            recipeName: formValues.recipeName,
-            ingrediants: formValues.ingrediants,
-            instructions: formValues.instructions,
-            category: formValues.category,
-        }
-        axios.post('https://reqres.in/api/orders', newRecipe)
-        .then(res => {
-            setFormValues(initialValues)
-            console.log(initialValues)
-        })
-        .catch(err =>{
+    
 
-        })
-    }
 
     return (
         <RecipeFormStyle>
             <div className='container'>
                 <h1>Recipe Card</h1>
-                {recipe.map((recipe,asd) => {
-                    return(
-                        <div key={asd}>
-                            {recipe.source} {recipe.title} {recipe.recipeName} {recipe.instructions}
-                        </div>
-                    )
-                })}
-                <form onSubmit={submit}>
+                <form>
                     <ul>
                     <li>
                     Title:<input 
                         type='text'
-                        onChange={change}
-                        value={formValues.title}
+                        onChange={handleChange}
+                        value={state.title}
                         name='title'
+    
                         />
                     </li>
                     <li>
                     Source:<input 
                         type='text'
-                        onChange={change}
-                        value={formValues.source}
+                        onChange={handleChange}
+                        value={state.source}
                         name='source'
+                        
                         />
                     </li>
                     
-                    <li>
-                    Recipe Name:<input 
-                        type='text'
-                        onChange={change}
-                        value={formValues.recipeName}
-                        name='recipeName'
-                        />
-                    </li>
+                    
                     <li>
                         Category:<input
                         type='text'
-                        onChange={change}
-                        value={formValues.category}
+                        onChange={handleChange}
+                        value={state.category}
                         name='category'
+                        
                         />
                     </li>
                     <li>
-                    Ingrediants:<textarea 
+                    Ingredients:<textarea 
                         type='text'
-                        onChange={change}
-                        value={formValues.ingrediants}
-                        name='ingrediants'
+                        onChange={handleChange}
+                        value={state.ingredients}
+                        name='ingredients'
+                        
                         />
                     </li>
                     <li>
                     instructions:<textarea 
                         type='text'
-                        onChange={change}
-                        value={formValues.instructions}
+                        onChange={handleChange}
+                        value={state.instructions}
                         name='instructions'
+                       
                         />
                     </li>
                     
                     </ul>
-                </form>
+                
                 <div className='buttons'>
-                    <button Trash onSubmit={submit}>
+                    <button onClick={handleSubmit}>
                         <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                     </button>
-                    <button onSubmit={submit}>
+                    <button onSubmit={handleSubmit}>
                         <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
                     </button>
                 </div>
+                </form>
             </div>
         </RecipeFormStyle>
     )
 }
 
-export default AddRecipeForm;
+const mapStateToProps = state => {
+    return({
+        errorMessage: state.error
+    })
+}
+
+export default  connect(mapStateToProps, {setError, addRecipe})(AddRecipeForm);
