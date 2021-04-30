@@ -81,13 +81,16 @@ const LogInFormStyle = styled.div`
 // 	username: "",
 // 	password: "",
 // };
-  
+
 //   const initialFormErrors = {
 // 	username: "",
 // 	password: "",
 //   };
-  
-const initialUsers = [];
+
+const initialUsers = {
+	username: "",
+	password: ""
+};
 // const initialDisabled = true;
 
 export default function LogInForm(props) {
@@ -97,9 +100,7 @@ export default function LogInForm(props) {
 	// const [disabled, setDisabled] = useState(initialDisabled);
 
 	const [users, setUsers] = useState(initialUsers);
-
 	const { push } = useHistory();
-
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -151,7 +152,6 @@ const onChange = (e) => {
 			<form onSubmit={ onSubmit }>
 			<div className="container">
 				<h1>Log In</h1>
-				<form>
 					<ul>
 						<li>
 							User Name:
@@ -162,7 +162,6 @@ const onChange = (e) => {
 							<input type="password" onChange={onChange} name="password" />
 						</li>
 					</ul>
-				</form>
 				<button className="cta-btn">Log in</button>
 			</div>
 			</form>
