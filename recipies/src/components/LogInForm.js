@@ -1,10 +1,21 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 import { axiosWithAuth } from './utils/axiosWithAuth';
 
 const LogInFormStyle = styled.div`
+	background-image: url('https://cdn2.newsok.biz/cache/large960_blur-72bd4d63ee549586c0b0dc10a9e45e63.jpg');
+	height: 100vh;
+	width: 100vw;
+	background: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	display: grid;
+	place-items: center;
+
 	* {
 		margin: 0;
 		padding: 0;
@@ -13,7 +24,8 @@ const LogInFormStyle = styled.div`
 
 	.container {
 		height: auto;
-		width: 50%;
+		/* width: 100%; */
+		padding: 2rem;
 		box-shadow: 0px 5px 10px RGBA(225, 226, 224, 1);
 		background: linear-gradient(to right, #ccbe1d, #fc9471);
 		margin: 0 auto;
@@ -78,20 +90,19 @@ const LogInFormStyle = styled.div`
 	}
 `;
 const initialFormValues = {
-	username: "",
-	password: "",
-  };
-  
-  const initialFormErrors = {
-	username: "",
-	password: "",
-  };
-  
-  const initialUsers = [];
-  const initialDisabled = true;
+	username: '',
+	password: ''
+};
+
+const initialFormErrors = {
+	username: '',
+	password: ''
+};
+
+const initialUsers = [];
+const initialDisabled = true;
 
 export default function LogInForm(props) {
-
 	const [formValues, setFormValues] = useState(initialFormValues);
 
 	const [disabled, setDisabled] = useState(initialDisabled);
@@ -100,21 +111,19 @@ export default function LogInForm(props) {
 
 	const { push } = useHistory();
 
-
-	const onSubmit = (e) => {
+	const onSubmit = e => {
 		e.preventDefault();
-		console.log (users)
+		console.log(users);
 		axios
-		.post('https://buildweekrecipes.herokuapp.com/api/auth/login', users)
-		.then((res) => {
-			
-			localStorage.setItem('token', res.data.token);
-			push('./recipes');
-			console.log(res.data.token);
-		})
-		.catch((err) => {
-			console.log('Username or password not valid.', err);
-		})
+			.post('https://buildweekrecipes.herokuapp.com/api/auth/login', users)
+			.then(res => {
+				localStorage.setItem('token', res.data.token);
+				push('./recipes');
+				console.log(res.data.token);
+			})
+			.catch(err => {
+				console.log('Username or password not valid.', err);
+			});
 	};
 	// const change = ev => {
 	// 	const { name, value } = ev.target;
@@ -122,12 +131,12 @@ export default function LogInForm(props) {
 	// 	console.log(value);
 	// 	setFormValues({ ...formValues, [name]: value });
 	// };
-const onChange = (e) => {
-	setUsers({
-		...users,
-		[e.target.name]: e.target.value,
-	})
-};
+	const onChange = e => {
+		setUsers({
+			...users,
+			[e.target.name]: e.target.value
+		});
+	};
 	// const submit = ev => {
 	// 	ev.preventDefault();
 	// 	const newRecipe = {
@@ -148,23 +157,23 @@ const onChange = (e) => {
 
 	return (
 		<LogInFormStyle>
-			<form onSubmit={ onSubmit }>
-			<div className="container">
-				<h1>Log In</h1>
-				<form>
-					<ul>
-						<li>
-							User Name:
-							<input type="text" value={users.username} onChange={onChange} name="username" />
-						</li>
-						<li>
-							Password:
-							<input type="password" onChange={onChange} name="password" />
-						</li>
-					</ul>
-				</form>
-				<button className="cta-btn">Log in</button>
-			</div>
+			<form onSubmit={onSubmit}>
+				<div className="container">
+					<h1>Log In</h1>
+					<form>
+						<ul>
+							<li>
+								User Name:
+								<input type="text" value={users.username} onChange={onChange} name="username" />
+							</li>
+							<li>
+								Password:
+								<input type="password" onChange={onChange} name="password" />
+							</li>
+						</ul>
+					</form>
+					<button className="cta-btn">Log in</button>
+				</div>
 			</form>
 		</LogInFormStyle>
 	);

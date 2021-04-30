@@ -28,17 +28,26 @@ const Nav = styled.div`
 
 	.nav-links {
 		display: flex;
-		justify-content: space-around;
-		width: 40%;
-        color: rgb(226, 226, 226);
+		justify-content: space-between;
+		width: 30%;
+		/* color: rgb(226, 226, 226); */
+		color: #e1e2e0;
+		/* text-decoration: none; */
+		/* letter-spacing: 3px; */
+		/* font-weight: bold; */
+		/* font-size: 24px; */
+	}
+	.nav-link {
+		/* display: flex;
+		justify-content: space-around; */
+		width: 100%;
+		color: rgb(226, 226, 226);
 		color: #e1e2e0;
 		text-decoration: none;
 		letter-spacing: 3px;
 		font-weight: bold;
 		font-size: 24px;
 	}
-
-	
 
 	.burger {
 		display: none;
@@ -122,10 +131,7 @@ const Nav = styled.div`
 	}
 `;
 
-
 export default function MarketingNav() {
-
-
 	return (
 		<Nav>
 			<nav key={Math.random()}>
@@ -133,12 +139,14 @@ export default function MarketingNav() {
 					<div id="logo-space">
 						<h3 className="logo">ReciPeazy</h3>
 					</div>
-                    <NavLink to='/login' style={{textDecoration:'none'}}>
-                <section className = 'nav-links'>Login</section>
-            </NavLink>
-            <NavLink to ='/signup' style={{textDecoration:'none'}}>
-                <section className = 'nav-links'>Sign Up</section>
-            </NavLink>
+					<div className="nav-links">
+						<NavLink to="/login" style={{ textDecoration: 'none' }}>
+							<section className="nav-link">Login</section>
+						</NavLink>
+						<NavLink to="/signup" style={{ textDecoration: 'none' }}>
+							<section className="nav-link">Sign Up</section>
+						</NavLink>
+					</div>
 				</div>
 			</nav>
 		</Nav>
