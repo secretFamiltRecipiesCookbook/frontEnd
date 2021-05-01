@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
+
 import {
     useHistory,
     useParams
 } from 'react-router';
-import {fetchSingleRecipe} from './../Actions/actions.js';
 
+import {fetchSingleRecipe} from './../Actions/actions.js';
 import {setError, editRecipe} from '../Actions/actions';
 import { connect } from "react-redux";
-import axios from 'axios';
-import { axiosWithAuth } from './utils/axiosWithAuth.js';
+
 
 
 const RecipeFormStyle = styled.div`
@@ -65,12 +65,6 @@ textarea{
 }
 
 `
-const Trash = styled.span`
-color:red;
-`
-const Check = styled.span`
-color:green;
-`
 
 const initialFormValues = {
     source: '',
@@ -90,9 +84,11 @@ const UpdateRecipeForm = (props) => {
     const [recipeToEdit, setRecipeToEdit] = useState(initialFormValues);
     const { id } = useParams();
     
+    console.log(props)
 
     useEffect(() => {
-        fetchSingleRecipe(id);
+        props.fetchSingleRecipe(id);
+        setRecipeToEdit(props.recipe);
     }, []);
 
     // useEffect(() => {
@@ -118,8 +114,9 @@ const UpdateRecipeForm = (props) => {
     
     const handleSubmit = e => {
         e.preventDefault();
-            props.editRecipe();
-            push(`/recipes`)
+            props.editRecipe(recipeToEdit, id);
+            push(`/recipes`);
+            // window.location.reload();
     }
 
     // console.log(state);
@@ -196,10 +193,11 @@ const UpdateRecipeForm = (props) => {
 }
 
 const mapStateToProps = state => {
+    console.log(state)
     return({
         recipe: state.recipe,
         errorMessage: state.error
     })
 }
 
-export default  connect(mapStateToProps, {setError, editRecipe})(UpdateRecipeForm);
+export default  connect(mapStateToProps, {setError, editRecipe, fetchSingleRecipe})(UpdateRecipeForm);

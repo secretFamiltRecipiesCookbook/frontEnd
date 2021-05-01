@@ -16,7 +16,7 @@ export const fetchRecipes = () => {
         axiosWithAuth()
             .get('/api/recipes/')
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 dispatch({ type: FETCH_SUCCESS, payload: res.data })
             })
             .catch(err => {
@@ -31,9 +31,11 @@ export const fetchSingleRecipe = (id) => {
         axiosWithAuth()
             .get(`/api/recipes/${id}`)
             .then((res) => {
+                console.log('Single Recipe: ', res.data);
                 dispatch({ type: FETCH_SUCCESS_ONE_RECIPE, payload: res.data })
             })
             .catch(err => {
+                console.log({ err })
                 dispatch({ type: FETCH_ERR, payload: err.response.data });
     });
     }
@@ -51,15 +53,18 @@ export const addRecipe = (recipe) =>{
     }
 };
 
-export const editRecipe = (recipe) =>{
+export const editRecipe = (recipe, id) =>{
     return (dispatch) => {
     axiosWithAuth()
-        .put('/api/recipes/:id', recipe) // I think I'm passing the wrong thing over
+        .put(`/api/recipes/${id}`, recipe) // I think I'm passing the wrong thing over
     .then((res) => {
         console.log(res.data)
-        dispatch({ type: RECIPE_EDIT, payload: res.data })
+        dispatch({ type: RECIPE_EDIT, payload: { ...res.data, title: recipe.title } })
     })
-    .catch( error => { console.log( error.response.request._response ) });
+    .catch( error => {
+        // console.log( error.response.request._response )
+        console.log({ error })
+    });
     }
 };
 
