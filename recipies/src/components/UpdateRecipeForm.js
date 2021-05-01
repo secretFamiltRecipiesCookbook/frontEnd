@@ -72,6 +72,7 @@ const initialFormValues = {
     ingredients:'',
     instructions:'',
     category:'',
+    image: null
 };
 
 
